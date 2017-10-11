@@ -7,8 +7,8 @@ package bitcamp.java100;
 public class Test15_11_1 {
 
     public static void main(String[] args) {
-//임무: 파일의 정보를 저장하라!
-// - 디렉토리여부, 소유주/그룹/기타 사용자의 사용권한(읽기, 쓰기, 실행 권한 정보)
+        //임무: 파일의 정보를 저장하라!
+        // - 디렉토리여부, 소유주/그룹/기타 사용자의 사용권한(읽기, 쓰기, 실행 권한 정보)
         class Privilege {
             boolean isDirectory;
             boolean ownerRead;
@@ -19,7 +19,7 @@ public class Test15_11_1 {
             boolean groupExe;
             boolean otherRead;
             boolean otherWrite;
-            boolean otherExe;
+            boolean otherExe;   
         }
         Privilege p1 = new Privilege();
         p1.isDirectory = false;
@@ -32,7 +32,7 @@ public class Test15_11_1 {
         p1.otherRead = true;
         p1.otherWrite = false;
         p1.otherExe = true;
-        
+
         System.out.print(p1.isDirectory ? "d" : "-");
         System.out.print(p1.ownerRead ? "r" : "-");
         System.out.print(p1.ownerWrite ? "w" : "-");
@@ -44,6 +44,6 @@ public class Test15_11_1 {
         System.out.print(p1.otherWrite ? "w" : "-");
         System.out.print(p1.otherExe ? "x" : "-");
         System.out.println();
-        
-        }
+
+    }
 }
