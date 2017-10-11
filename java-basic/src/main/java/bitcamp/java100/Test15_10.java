@@ -6,7 +6,7 @@ package bitcamp.java100;
 
 public class Test15_10 {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) { 
         int v1 = 0b0101_1100;
         int v2 = 0b0110_0110;
         
