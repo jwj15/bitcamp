@@ -1,10 +1,12 @@
 package control;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Iterator;
-import java.util.Scanner;
 
 import domain.Score;
 import util.Prompts;
@@ -19,25 +21,27 @@ public class ScoreController extends GenericController<Score> {
     @Override
     public void destroy() {
 
-        try (FileWriter out = new FileWriter(this.dataFilePath);) {
+        try (PrintWriter out = new PrintWriter(
+                                    new BufferedWriter(
+                                        new FileWriter(this.dataFilePath)))) {
 
             for (Score score : this.list) {
-                out.write(score.toCSVString() + "\n");
+                out.println(score.toCSVString());
             }
-
+            out.flush();
+            
         } catch (IOException e) {
             e.printStackTrace();
         } 
     }
+    
     @Override
     public void init() {
 
-        try (FileReader in = new FileReader(this.dataFilePath); 
-                Scanner lineScan = new Scanner(in);) {
+        try (BufferedReader in = new BufferedReader(new FileReader(this.dataFilePath));) {
             String csv = null;
-            while (lineScan.hasNextLine()) {
-                csv = lineScan.nextLine();
-                
+            
+            while ((csv = in.readLine()) != null) {
                 try {
                     list.add(new Score(csv));
                 } catch (CSVFormatException e) {

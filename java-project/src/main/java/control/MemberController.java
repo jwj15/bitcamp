@@ -1,8 +1,11 @@
 package control;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.Scanner;
 
@@ -20,11 +23,14 @@ public class MemberController extends GenericController<Member> {
     @Override
     public void destroy() {
 
-        try (FileWriter out = new FileWriter(this.dataFilePath);) {
+        try (PrintWriter out = new PrintWriter(
+                new BufferedWriter(
+                        new FileWriter(this.dataFilePath)))) {
 
             for (Member member : this.list) {
-                out.write(member.toCSVString() + "\n");
+                out.println(member.toCSVString());
             }
+            out.flush();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -34,11 +40,9 @@ public class MemberController extends GenericController<Member> {
     @Override
     public void init() {
 
-        try (FileReader in = new FileReader(this.dataFilePath); 
-                Scanner lineScan = new Scanner(in);) {
+        try (BufferedReader in = new BufferedReader(new FileReader(this.dataFilePath))) {
             String csv = null;
-            while (lineScan.hasNextLine()) {
-                csv = lineScan.nextLine();
+            while ((csv = in.readLine()) != null) {
                 
                 try {
                     list.add(new Member(csv));
