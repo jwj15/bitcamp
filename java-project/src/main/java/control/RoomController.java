@@ -10,13 +10,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
+import domain.Member;
 import domain.Room;
 import util.Prompts;
 
 public class RoomController extends ArrayList<Room> implements Controller {
-    /**
-     * 
-     */
+    
     private static final long serialVersionUID = 1L;
     Scanner keyScan = new Scanner(System.in);
     private String dataFilePath;
@@ -62,68 +61,88 @@ public class RoomController extends ArrayList<Room> implements Controller {
     }
     
     @Override // 이 애노테이션은 붙이지 않아도 된다.
-    public void execute() {
-        loop:
-        while (true) {
-            System.out.print("강의실관리> ");
-            String input = keyScan.nextLine();
+    public void execute(Request request, Response response) {
             
-            switch (input) {
-            case "list": this.doList(); break;
-            case "add": this.doAdd(); break;
-            case "delete": this.doDelete(); break;
-            case "main": break loop;
+            switch (request.getMenuPath()) {
+            case "/room/list": this.doList(request, response); break;
+            case "/room/add": this.doAdd(request, response); break;
+            case "/room/delete": this.doDelete(request, response); break;
+            case "/room/view": this.doView(request, response); break;
+            case "/room/update": this.doUpdate(request, response); break;
             default: 
-                System.out.println("해당 명령이 없습니다.");
+                response.getWriter().println("해당 명령이 없습니다.");
             }
-        }
+       
     }
     
-    private void doList() {
-        System.out.println("[강의실 목록]");
+    private void doList(Request request, Response response) {
+        PrintWriter out = response.getWriter();
+        out.println("[강의실 목록]");
         
         Iterator<Room> iterator = this.iterator();
         while (iterator.hasNext()) {
             Room room = iterator.next();
-            System.out.printf("%s, %s, %d\n",  
-                room.getLocation(), room.getName(), room.getCapacity());
+            out.printf("%s, %s, %d\n",  
+                 room.getName() ,room.getLocation(), room.getCapacity());
         }
     }
     
-    private void doAdd() {
-        System.out.println("[강의실 등록]");
+    private void doAdd(Request request, Response response) {
+        PrintWriter out = response.getWriter();
+        out.println("[강의실 등록]");
         
         Room room = new Room();
-        room.setName(Prompts.inputString("강의실 이름? "));
-        
-        if (find(room.getName()) != null) {
-            System.out.println("이미 등록된 강의실입니다.");
-            return;
-        }
-        
-        room.setLocation(Prompts.inputString("지역? "));
-        room.setCapacity(Prompts.inputInt("수용인원? "));
+        room.setName(request.getParameter("name"));
+        room.setLocation(request.getParameter("location"));
+        room.setCapacity(Integer.parseInt(request.getParameter("capacity")));
         
         this.add(room);
+        out.println("저장하였습니다.");
     } 
     
-    private void doDelete() {
-        System.out.println("[강의실 삭제]");
-        String roomName = Prompts.inputString("강의실 이름? ");
-        
+    private void doDelete(Request request, Response response) {
+        PrintWriter out = response.getWriter();
+        String roomName = request.getParameter("name");
         Room room = find(roomName);
+        out.println("[강의실 삭제]");
         
         if (room == null) {
-            System.out.printf("'%s' 강의실 정보가 없습니다.\n", roomName);
+            out.printf("'%s' 강의실 정보가 없습니다.\n", roomName);
+            return;
+        }
+
+        this.remove(room);
+        out.println("삭제하였습니다.");
+    }
+    private void doView(Request request, Response response) {
+        PrintWriter out = response.getWriter();
+        String roomName = request.getParameter("name");
+        Room room = find(roomName);
+        out.println("[강의실 상세 정보]");
+        
+        if (room == null) {
+            out.printf("'%s'의 강의실 정보가 없습니다.\n", roomName);
             return;
         }
         
-        if (Prompts.confirm2("정말 삭제하시겠습니까?(y/N) ")) {
-            this.remove(room);
-            System.out.println("삭제하였습니다.");
-        } else {
-            System.out.println("삭제를 취소하였습니다.");
+        out.printf("강의실이름: %s\n", room.getName());
+        out.printf("위치: %s\n", room.getLocation());
+        out.printf("수용인원: %d\n", room.getCapacity());
+    } 
+    
+    private void doUpdate(Request request, Response response) {
+        PrintWriter out = response.getWriter();
+        String roomName = request.getParameter("name");
+        Room room = find(roomName);
+        out.println("[강의실 정보 변경]");
+        
+        if (room == null) {
+            out.printf("'%s'의 강의실 정보가 없습니다.\n", roomName);
+            return;
         }
+        room.setLocation(request.getParameter("location"));
+        room.setCapacity(Integer.parseInt(request.getParameter("capacity")));
+        out.println("변경하였습니다.");
     }
     
     private Room find(String roomName) {

@@ -8,10 +8,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.util.Iterator;
-import java.util.Scanner;
 
 import domain.Board;
-import domain.Member;
 import util.Prompts;
 
 public class BoardController extends GenericController<Board> {
@@ -57,32 +55,29 @@ public class BoardController extends GenericController<Board> {
         }
     }
     @Override
-    public void execute() {
-        loop:
-        while (true) {
-            System.out.print("게시판> ");
-            String input = keyScan.nextLine();
+    public void execute(Request request, Response response) {
+        
             
-            switch (input) {
-            case "list": this.doList(); break;
-            case "add": this.doAdd(); break;
-            case "view": this.doView(); break;
-            case "update": this.doUpdate(); break;
-            case "delete": this.doDelete(); break;
-            case "main": break loop;
+            switch (request.getMenuPath()) {
+            case "/board/list": this.doList(request, response); break;
+            case "/board/add": this.doAdd(request, response); break;
+            case "/board/view": this.doView(request, response); break;
+            case "/board/update": this.doUpdate(request, response); break;
+            case "/board/delete": this.doDelete(request, response); break;
             default: 
-                System.out.println("해당 명령이 없습니다.");
-            }
+                response.getWriter().println("해당 명령이 없습니다.");
+            
         }
     }
     
-    private void doList() {
-        System.out.println("[게시물 목록]");
+    private void doList(Request request, Response response) {
+        PrintWriter out = response.getWriter();
+        out.println("[게시물 목록]");
         
         Iterator<Board> iterator = list.iterator();
         while (iterator.hasNext()) {
             Board board = iterator.next();
-            System.out.printf("%d, %s, %s, %d\n",  
+            out.printf("%d, %s, %s, %d\n",  
                     board.getNo(), 
                     board.getTitle(),
                     board.getRegDate().toString(),
@@ -90,90 +85,76 @@ public class BoardController extends GenericController<Board> {
         }
     }
 
-    private void doAdd() {
-        System.out.println("[게시물 등록]");
+    private void doAdd(Request request, Response response) {
+        PrintWriter out = response.getWriter();
+        out.println("[게시물 등록]");
         
         Board board = new Board(); 
-        board.setNo(Prompts.inputInt("번호? "));
-
-        if (findByNo(board.getNo()) != null) {
-            System.out.println("이미 등록된 번호입니다.");
-            return;
-        } 
-            
-        board.setTitle(Prompts.inputString("제목? "));
-        board.setContent(Prompts.inputString("내용? "));
+        board.setNo(Integer.parseInt(request.getParameter("no")));
+        board.setTitle(request.getParameter("title"));
+        board.setContent(request.getParameter("content"));
         board.setRegDate(new Date(System.currentTimeMillis()));
         
         list.add(board);
+        out.println("저장하였습니다.");
     } 
     
-    private void doView() {
-        System.out.println("[게시물 상세 정보]");
-        int no = Prompts.inputInt("번호? ");
+    private void doView(Request request, Response response) {
+        PrintWriter out = response.getWriter();
+        int no = Integer.parseInt(request.getParameter("no"));
         
         Board board = findByNo(no);
         
+        out.println("[게시물 상세 정보]");
+        
+        
         if (board == null) {
-            System.out.printf("%d번 게시물이 없습니다.\n", no);
+            out.printf("%d번 게시물이 없습니다.\n", no);
             return;
         }
         
-        System.out.printf("제목: %s\n", board.getTitle());
-        System.out.printf("내용: %s\n", board.getContent());
-        System.out.printf("등록일: %s\n", board.getRegDate().toString());
+        out.printf("제목: %s\n", board.getTitle());
+        out.printf("내용: %s\n", board.getContent());
+        out.printf("등록일: %s\n", board.getRegDate().toString());
         board.setViewCount(board.getViewCount() + 1);
-        System.out.printf("조회수: %d\n", board.getViewCount());
+        out.printf("조회수: %d\n", board.getViewCount());
     } 
     
-    private void doUpdate() {
-        System.out.println("[게시물 변경]");
-        int no = Prompts.inputInt("번호? ");
+    private void doUpdate(Request request, Response response) {
+        PrintWriter out = response.getWriter();
+        int no = Integer.parseInt(request.getParameter("no"));
         
         Board board = findByNo(no);
+        out.println("[게시물 변경]");
         
         if (board == null) {
-            System.out.printf("%d번 게시물이 없습니다.\n", no);
+            out.printf("%d번 게시물이 없습니다.\n", no);
             return;
         } 
         
-        String title = Prompts.inputString("제목?(%s) ", board.getTitle());
-        if (title.isEmpty()) {
-            title = board.getTitle();
-        }
+        board.setTitle(request.getParameter("title"));
+        board.setContent(request.getParameter("content"));
+        board.setRegDate(new Date(System.currentTimeMillis()));
+        out.println("변경하였습니다.");
         
-        String content = Prompts.inputString("내용? ");
-        
-        if (Prompts.confirm2("변경하시겠습니까?(y/N) ")) {
-            board.setTitle(title);
-            board.setContent(content);
-            board.setRegDate(new Date(System.currentTimeMillis()));
-            System.out.println("변경하였습니다.");
-            
-        } else {
-            System.out.println("변경을 취소하였습니다.");
-        }
     }
     
-    private void doDelete() {
-        System.out.println("[게시물 삭제]");
-        int no = Prompts.inputInt("번호? ");
-        
-        Board board = findByNo(no);
-        
-        if (board == null) {
-            System.out.printf("%d번 게시물이 없습니다.\n", no);
-            return;
-        } 
+    private void doDelete(Request request, Response response) {
+        PrintWriter out = response.getWriter();
+        int no = Integer.parseInt(request.getParameter("no"));
+        out.println("[게시물 삭제]");
 
-        if (Prompts.confirm2("정말 삭제하시겠습니까?(y/N) ")) {
-            list.remove(board);
-            System.out.println("삭제하였습니다.");
-        } else {
-            System.out.println("삭제를 취소하였습니다.");
-        }
+        Board board = findByNo(no);
+
+        if (board == null) {
+            out.printf("%d번 게시물이 없습니다.\n", no);
+            return;
+        } 
+        list.remove(board);
+        out.println("삭제하였습니다.");
+
     }
-    
+
     private Board findByNo(int no) {
         Iterator<Board> iterator = list.iterator();
         while (iterator.hasNext()) {
