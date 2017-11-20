@@ -23,7 +23,7 @@ import control.Response;
 import control.RoomController;
 import control.ScoreController;
 
-// App 클래스를 서버 프로그램으로 전환한다.
+// App 클래스를 서버 프로그램으로 전환한다
 // 그리고 실행 방식도 변경한다.
 // 
 // 클라이언트 쪽 실행방법
