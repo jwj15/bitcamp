@@ -16,7 +16,6 @@ public class Test2_2 {
             data[i] = (int)(Math.random() * 100000);
         }
         
-        
         FileOutputStream out = new FileOutputStream("./test2.dat");
         
         // 4백만개의 데이터를 출력해보고, 걸린 시간을 알아보자!

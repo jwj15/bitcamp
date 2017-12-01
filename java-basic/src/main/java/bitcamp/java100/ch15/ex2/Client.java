@@ -10,7 +10,7 @@ public class Client {
         // 서버에 연결 요청한다.
         // => 서버 대기열에 자리가 있으면 리턴한다.
         // => 서버 대기열에 자리가 없으면 예외 발생.
-        Socket socket = new Socket("192.168.0.58", 9999);
+        Socket socket = new Socket("192.168.0.86", 9999);
         System.out.println("서버와 연결되었다!");
         
         // 상대편 접속 정보 출력

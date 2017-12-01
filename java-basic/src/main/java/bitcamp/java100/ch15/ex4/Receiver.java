@@ -14,7 +14,6 @@ public class Receiver {
         // 이쪽이 수신자임을 서버에게 알린다.
         PrintStream out = new PrintStream(socket.getOutputStream());
         out.println("receiver");
-        
         // 서버가 응답한 내용을 받아 출력한다.
         Scanner in = new Scanner(
                 socket.getInputStream());

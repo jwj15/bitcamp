@@ -40,7 +40,6 @@ public class Server {
         // 프로그램에서 어떤 포트를 사용할지 결정해야 한다.
         ServerSocket ss = new ServerSocket(9999);
         System.out.println("서버를 실행하였다!");
-        
         // 클라이언트의 연결을 기다린다.
         // => 클라이언트가 서버에 연결을 요청하면 클라이언트 정보가
         //    서버의 대기열에 추가된다.
@@ -54,7 +53,6 @@ public class Server {
         //    블로킹한다.
         // 
         Socket socket = ss.accept();
-        
         System.out.println("클라이언트와 연결되었음!");
         System.out.printf("서버 IP = %s\n", 
                 socket.getLocalAddress().getHostAddress());

@@ -2,7 +2,7 @@
 // HTTP 요청 프로토콜
 // 1) request-line
 // 문법)
-//   method sp request-uri sp protoco/version CRLF
+//   method sp request-uri sp protocol/version CRLF
 // 예)
 //   GET /media/static/media-263/dist/news/css/news.min.css HTTP/1.1
 

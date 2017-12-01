@@ -1,5 +1,5 @@
 // wait() 와 notify() 
-//
+
 package bitcamp.java100.ch16.ex1;
 
 public class Test5 {

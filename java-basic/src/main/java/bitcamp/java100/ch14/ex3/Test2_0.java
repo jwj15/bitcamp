@@ -17,7 +17,6 @@ public class Test2_0 {
         
         // 1) 읽을 문자열이 몇 바이트인지 알아낸다.
         int len = in.read();
-        
         // 2) 문자열을 담을 배열을 만든다.
         byte[] bytes = new byte[len];
         
