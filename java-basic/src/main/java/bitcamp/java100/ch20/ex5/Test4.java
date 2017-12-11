@@ -1,4 +1,4 @@
-// Spring IoC(Inversion of Control) 컨테이너 - 셋터 호출
+// Spring IoC(Inversion of Control) 컨테이너 - Engine 프로퍼티 변환기
 // 
 package bitcamp.java100.ch20.ex5;
 
@@ -11,9 +11,9 @@ public class Test4 {
         ClassPathXmlApplicationContext appCtx = 
                 new ClassPathXmlApplicationContext(
                         "bitcamp/java100/ch20/ex5/application-context4.xml");
+        
         System.out.println(appCtx.getBean("c1"));
     }
-    
 }
 
 

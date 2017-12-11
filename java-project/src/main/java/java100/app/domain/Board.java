@@ -9,15 +9,11 @@ public class Board {
     protected Date regDate;
     protected int viewCount;
     
-    public Board() {}
-
-    
     @Override
     public String toString() {
         return "Board [no=" + no + ", title=" + title + ", content=" + content + ", regDate=" + regDate + ", viewCount="
                 + viewCount + "]";
     }
-
 
     public int getNo() {
         return no;

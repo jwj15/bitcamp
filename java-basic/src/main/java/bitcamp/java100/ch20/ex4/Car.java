@@ -18,7 +18,7 @@ public class Car {
     public Car() {
         System.out.println("Car()");
     }
-
+    
     @Override
     public String toString() {
         return "Car [model=" + model + ", color=" + color + ", capacity=" + capacity + ", engine=" + engine + ", tires="
@@ -31,7 +31,6 @@ public class Car {
 
     public void setOptions(Map<String, String> options) {
         this.options = options;
-        System.out.println("setOptions()");
     }
 
     public Set<CD> getJukebox() {
@@ -40,9 +39,7 @@ public class Car {
 
     public void setJukebox(Set<CD> jukebox) {
         this.jukebox = jukebox;
-        System.out.println("setJukebox()");
     }
-
 
     public List<Seat> getSeats() {
         return seats;
@@ -50,7 +47,6 @@ public class Car {
 
     public void setSeats(List<Seat> seats) {
         this.seats = seats;
-        System.out.println("setSeats()");
     }
 
     public Tire[] getTires() {

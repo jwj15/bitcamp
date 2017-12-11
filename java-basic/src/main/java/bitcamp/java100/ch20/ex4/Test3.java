@@ -1,4 +1,4 @@
-// Spring IoC(Inversion of Control) 컨테이너 - 셋터 호출
+// Spring IoC(Inversion of Control) 컨테이너 - Set 구현체 주입하기
 // 
 package bitcamp.java100.ch20.ex4;
 
@@ -11,7 +11,7 @@ public class Test3 {
         ClassPathXmlApplicationContext appCtx = 
                 new ClassPathXmlApplicationContext(
                         "bitcamp/java100/ch20/ex4/application-context3.xml");
-        System.out.println(appCtx.getBean("c1"));
+
     }
 }
 

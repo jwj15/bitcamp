@@ -14,8 +14,7 @@ public class Room {
         this.name = name;
         this.capacity = capacity;
     }
-
-
+    
     @Override
     public String toString() {
         return "Room [no=" + no + ", location=" + location + ", name=" + name + ", capacity=" + capacity + "]";

@@ -3,6 +3,7 @@ package java100.app.domain;
 import java.sql.Date;
 
 public class Member {
+    
     protected int no;
     protected String name;
     protected String email;
@@ -11,13 +12,18 @@ public class Member {
     
     public Member() {}
     
-    public Member(int no,String name, String email) {
+    public Member(int no, String name, String email) {
         this.no = no;
         this.name = name;
         this.email = email;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "Member [no=" + no + ", name=" + name + ", email=" + email + ", password=" + password + ", createdDate="
+                + createdDate + "]";
+    }
+
     public int getNo() {
         return no;
     }
@@ -57,13 +63,6 @@ public class Member {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    @Override
-    public String toString() {
-        return "Member [no=" + no + ", name=" + name + ", email=" + email + ", password=" + password + ", createdDate="
-                + createdDate + "]";
-    }
-    
     
 }
 

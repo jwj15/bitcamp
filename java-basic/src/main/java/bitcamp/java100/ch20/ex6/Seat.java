@@ -1,13 +1,17 @@
 package bitcamp.java100.ch20.ex6;
 
 public class Seat {
-    
     String type;
     boolean heat;
     boolean autoControl;
     
     public Seat() {
         System.out.println("Seat()");
+    }
+    
+    @Override
+    public String toString() {
+        return "Seat [type=" + type + ", heat=" + heat + ", autoControl=" + autoControl + "]";
     }
 
     public String getType() {
@@ -32,11 +36,6 @@ public class Seat {
 
     public void setAutoControl(boolean autoControl) {
         this.autoControl = autoControl;
-    }
-
-    @Override
-    public String toString() {
-        return "Seat [type=" + type + ", heat=" + heat + ", autoControl=" + autoControl + "]";
     }
     
     

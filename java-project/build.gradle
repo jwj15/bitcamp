@@ -1,6 +1,6 @@
 apply plugin: 'java'
-apply plugin: 'application'
-apply plugin: 'eclipse'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'war'
 eclipse {
   jdt {
     
@@ -30,10 +30,10 @@ repositories {
     jcenter()
 }
 dependencies {
+    providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
     compile 'org.springframework:spring-context:5.0.2.RELEASE'
     compile group: 'org.reflections', name: 'reflections', version: '0.9.11'
     compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.44'
     compile 'com.google.guava:guava:22.0'
     testCompile 'junit:junit:4.12'
 }
-mainClassName = 'App'

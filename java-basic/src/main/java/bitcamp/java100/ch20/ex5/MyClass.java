@@ -3,7 +3,6 @@ package bitcamp.java100.ch20.ex5;
 import java.sql.Date;
 
 public class MyClass {
-    
     String varString;
     byte varByte;
     short varShort;
@@ -14,14 +13,13 @@ public class MyClass {
     boolean varBoolean;
     char varChar;
     Date varDate;
-    
+
     @Override
     public String toString() {
         return "MyClass [varString=" + varString + ", varByte=" + varByte + ", varShort=" + varShort + ", varInt="
                 + varInt + ", varLong=" + varLong + ", varFloat=" + varFloat + ", varDouble=" + varDouble
                 + ", varBoolean=" + varBoolean + ", varChar=" + varChar + ", varDate=" + varDate + "]";
     }
-    
     public Date getVarDate() {
         return varDate;
     }
@@ -82,6 +80,8 @@ public class MyClass {
     public void setVarChar(char varChar) {
         this.varChar = varChar;
     }
+    
+    
     
     
     
