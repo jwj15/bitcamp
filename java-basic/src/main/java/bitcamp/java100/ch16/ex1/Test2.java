@@ -14,7 +14,7 @@ public class Test2 {
             }
         }
     }
-    
+
     public static void main(String[] args) {
         
         // 스레드 사용하기

@@ -1,4 +1,4 @@
-//: ## ver 50
+//: ## ver 53
 
 package java100.app;
 
@@ -11,8 +11,8 @@ import java100.app.util.DataSource;
 @Configuration
 @ComponentScan("java100.app")
 public class AppConfig {
-
-    @Bean 
+    
+    @Bean
     DataSource getDataSource() {
         DataSource ds = new DataSource();
         ds.setDriverClassName("com.mysql.jdbc.Driver");
