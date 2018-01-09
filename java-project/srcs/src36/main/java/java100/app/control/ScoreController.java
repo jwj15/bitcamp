@@ -65,7 +65,7 @@ public class ScoreController extends GenericController<Score> {
     
     @Override
     public void execute(Request request, Response response) {
-        
+
         switch (request.getMenuPath()) {
         case "/score/add": this.doAdd(request, response); break;
         case "/score/list": this.doList(request, response); break;
