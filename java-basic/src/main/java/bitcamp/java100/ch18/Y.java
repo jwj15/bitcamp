@@ -5,10 +5,12 @@ import java.net.Socket;
 import java.sql.Date;
 
 public class Y {
+
     private File f1;
     Date f2;
     protected StringBuffer f3;
     public Socket f4;
+    
     
     private void a1() {}
     void a2(int p1) {}

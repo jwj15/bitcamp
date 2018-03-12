@@ -2,7 +2,7 @@ package bitcamp.java100.ch20.ex4;
 
 public class CD {
     private String title;
-    private String singer;
+    private String Singer;
     
     public CD() {
         System.out.println("CD()");
@@ -10,7 +10,7 @@ public class CD {
 
     @Override
     public String toString() {
-        return "CD [title=" + title + ", singer=" + singer + "]";
+        return "CD [title=" + title + ", Singer=" + Singer + "]";
     }
 
     public String getTitle() {
@@ -22,11 +22,11 @@ public class CD {
     }
 
     public String getSinger() {
-        return singer;
+        return Singer;
     }
 
     public void setSinger(String singer) {
-        this.singer = singer;
+        Singer = singer;
     }
     
     

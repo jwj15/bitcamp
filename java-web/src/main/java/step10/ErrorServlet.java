@@ -1,5 +1,3 @@
-// 오류 내용을 출력하는 서블릿   
-//
 package step10;
 
 import java.io.IOException;
@@ -14,12 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 @SuppressWarnings("serial")
 @WebServlet("/step10/ErrorServlet")
 public class ErrorServlet extends HttpServlet {
-    
+
+
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        
-        req.setCharacterEncoding("UTF-8");
+
         res.setContentType("text/html;charset=UTF-8");
+        req.setCharacterEncoding("UTF-8");
         PrintWriter out = res.getWriter();
         
         out.println("<!DOCTYPE html>");
@@ -29,24 +28,15 @@ public class ErrorServlet extends HttpServlet {
         out.println("<title>error</title>");
         out.println("</head>");
         out.println("<body>");
-        out.println("<p>name 파라미터 값이 없습니다.</p>");
+        
+        out.println("<p>name파라미터값이 없습니다.</p>\n");
+
+        
         out.println("</body>");
         out.println("</html>");
     }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -9,6 +9,7 @@ public class Engine {
         System.out.println("Engine()");
     }
     
+    
     public String getName() {
         return name;
     }
@@ -30,6 +31,7 @@ public class Engine {
         this.cc = cc;
         System.out.println("setCc()");
     }
+
     
     
 }

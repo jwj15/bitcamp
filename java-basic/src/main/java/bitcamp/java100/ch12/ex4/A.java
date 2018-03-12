@@ -11,5 +11,6 @@ public class A implements Protocol {
     public void m2() {
         System.out.println("m2()");
     }
+
     
 }

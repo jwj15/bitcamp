@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>페이스북 로그인</title>
+</head>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+</fb:login-button>
+<script type="text/javascript">
+function autoServerLogin(accessToken) {
+    location.href = "login08.jsp?accessToken=" + accessToken;
+    };
+
+function statusChangeCallback(response) {
+    console.log(response);
+    if (response.status === 'connected') {
+        autoServerLogin(response.authResponse.accessToken);
+    } else {
+        console.log('로그인 되지 않았음');
+    }
+  }
+
+
+function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+        statusChangeCallback(response);
+    });
+    }
+
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId : '492653977795327',
+            cookie : true,
+            xfbml : true,
+            version : 'v2.12'
+        });
+    };
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id))
+            return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+</body>
+</html>

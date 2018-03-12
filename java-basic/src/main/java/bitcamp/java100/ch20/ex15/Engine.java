@@ -2,7 +2,7 @@ package bitcamp.java100.ch20.ex15;
 
 import org.springframework.stereotype.Component;
 
-@Component("bitengine") // 스프링 IoC 컨테이너에게 이 클래스의 객체를 만들어 달라고 요청!
+@Component("bitengine")
 public class Engine {
     private String name;
     private int valve;
@@ -12,11 +12,7 @@ public class Engine {
         System.out.println("Engine()");
     }
     
-    @Override
-    public String toString() {
-        return "Engine [name=" + name + ", valve=" + valve + ", cc=" + cc + "]";
-    }
-
+    
     public String getName() {
         return name;
     }
@@ -35,6 +31,13 @@ public class Engine {
     public void setCc(int cc) {
         this.cc = cc;
     }
+
+
+    @Override
+    public String toString() {
+        return "Engine [name=" + name + ", valve=" + valve + ", cc=" + cc + "]";
+    }
+
     
     
 }

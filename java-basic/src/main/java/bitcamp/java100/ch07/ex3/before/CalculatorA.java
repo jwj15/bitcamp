@@ -1,6 +1,7 @@
 package bitcamp.java100.ch07.ex3.before;
 
 public class CalculatorA {
+
     int result;
     
     void multiple(int value) {
@@ -12,9 +13,11 @@ public class CalculatorA {
             System.err.println("0으로 나누면 안됩니다!");
             return;
         }
+            
         this.result /= value;
     }
-
+    
+    
     void plus(int value) {
         this.result += value;
     }

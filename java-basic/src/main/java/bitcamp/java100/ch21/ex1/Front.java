@@ -9,13 +9,13 @@ public class Front {
     @Autowired X x;
     @Autowired Y y;
     @Autowired Z z;
-    
+     
     public void test() {
-        System.out.println("Font.test() 호출시작-----");
+        System.out.println("Front.test() 호출시작-----");
         x.m1();
         y.m1();
         z.m2();
-        System.out.println("Font.test() 호출 끝-----");
+        System.out.println("Front.test() 호출 끝------");
     }
-
+    
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Test2 {
-    
+
     static class Score {
         String name;
         int kor;
@@ -22,12 +22,15 @@ public class Test2 {
         Score score = new Score();
         System.out.print("이름? ");
         score.name = keyScan.nextLine();
+        
         try {
-        System.out.print("국어 점수? ");
+        System.out.print("국어? ");
         score.kor = Integer.parseInt(keyScan.nextLine());
-        System.out.print("영어 점수? ");
+        
+        System.out.print("영어? ");
         score.eng = Integer.parseInt(keyScan.nextLine());
-        System.out.print("수학 점수? ");
+        
+        System.out.print("수학? ");
         score.math = Integer.parseInt(keyScan.nextLine());
         } catch (RuntimeException e) {
             throw new Exception("입력이 잘못되었습니다.");
@@ -39,30 +42,27 @@ public class Test2 {
     }
     
     static void print() {
-        for (Score s : list) {
-            System.out.printf("%s,%d,%d,%d,%d,%f\n", s.name, s.kor, s.eng, s.math, s.sum, s.aver);
-        }
+        for (Score s : list)
+            System.out.printf("%s, %d, %d, %d, %d, %.1f\n", s.name, s.kor, s.eng, s.math, s.sum, s.aver);
     }
     
     public static void main(String[] args) {
-     
+        
         while (true) {
             try {
             input();
             } catch (Exception e) {
                 System.out.println("입력 중 오류가 발생했습니다.");
             }
-            System.out.print("계속 하시겠습니까? (Y/n)");
+            System.out.print("계속 하시겠습니까?(Y/n) ");
             String str = keyScan.nextLine().toLowerCase();
             if (str.equals("") || str.equals("y") || str.equals("yes")) {
                 continue;
             }
             break;
-            }
-        System.out.println("--------------------------------------------");
-        print();
-        
         }
-            
-    
+        System.out.println("----------------------------------------------");
+        
+        print();
+    }
 }

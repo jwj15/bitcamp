@@ -1,12 +1,11 @@
-<%@ page language="java" 
-    contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" 
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"
     trimDirectiveWhitespaces="true"%>
-<!DOCTYPE html>
+<!DOCTYPE html >
 <html>
 <head>
 <meta charset="UTF-8">
-<title>JSP예제</title>
+<title>JSP 예제</title>
 <link rel='stylesheet' href='../common.css'>
 </head>
 <body>
@@ -14,8 +13,9 @@
 웹 애플리케이션이 시작될 때 생성된다.<br>
 웹 애플리케이션이 종료될 때 제거된다.<br>
 웹 애플리케이션이 실행되는 동안 공유할 데이터는 이 보관소에 저장한다.<br>
-보통 여러 서블릿/JSP에서 공통으로 사용하는 객체를 주로 저장한다.<br> 
- 
+보통 여러 서블릿/JSP에서 공통으로 사용하는 객체를 주로 저장한다.<br>
+
+
 <%
 application.setAttribute("name", "홍길동");
 %>
@@ -25,12 +25,6 @@ application.setAttribute("name", "홍길동");
 </p>
 <hr>
 <%=application.getAttribute("name")%>
-
 </body>
 </html>
-
-
-
-
-
 

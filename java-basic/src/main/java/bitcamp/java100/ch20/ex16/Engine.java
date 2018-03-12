@@ -9,11 +9,7 @@ public class Engine {
         System.out.println("Engine()");
     }
     
-    @Override
-    public String toString() {
-        return "Engine [name=" + name + ", valve=" + valve + ", cc=" + cc + "]";
-    }
-
+    
     public String getName() {
         return name;
     }
@@ -32,6 +28,13 @@ public class Engine {
     public void setCc(int cc) {
         this.cc = cc;
     }
+
+
+    @Override
+    public String toString() {
+        return "Engine [name=" + name + ", valve=" + valve + ", cc=" + cc + "]";
+    }
+
     
     
 }

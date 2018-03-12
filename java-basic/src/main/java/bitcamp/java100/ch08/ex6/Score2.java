@@ -1,4 +1,3 @@
-// hashCode() 오버라이딩 후
 package bitcamp.java100.ch08.ex6;
 
 public class Score2 {
@@ -9,7 +8,7 @@ public class Score2 {
     protected int math;
     protected int sum;
     protected float aver;
-    
+
     public Score2() {}
     
     public Score2(int no, String name, int kor, int eng, int math) {
@@ -22,15 +21,13 @@ public class Score2 {
         this.compute();
     }
     
-    @Override
     public String toString() {
         return "Score [no=" + no + ", name=" + name + ", kor=" + kor + ", eng=" + eng + ", math=" + math + ", sum="
                 + sum + ", aver=" + aver + "]";
     }
 
     
-    
-    @Override
+      @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
@@ -85,11 +82,11 @@ public class Score2 {
 
     public int getKor() {
         return kor;
+
     }
 
     public void setKor(int kor) {
         this.kor = kor;
-        
         this.compute();
     }
 
@@ -99,7 +96,6 @@ public class Score2 {
 
     public void setEng(int eng) {
         this.eng = eng;
-        
         this.compute();
     }
 
@@ -109,7 +105,6 @@ public class Score2 {
 
     public void setMath(int math) {
         this.math = math;
-        
         this.compute();
     }
 
@@ -120,15 +115,10 @@ public class Score2 {
     public float getAver() {
         return aver;
     }
-    
+        
     protected void compute() {
         this.sum = this.kor + this.eng + this.math;
         this.aver = this.sum / 3f;
     }
-    
-    
+
 }
-
-
-
-

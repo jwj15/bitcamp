@@ -8,7 +8,7 @@ public class Score {
     protected int math;
     protected int sum;
     protected float aver;
-    
+
     public Score() {}
     
     public Score(int no, String name, int kor, int eng, int math) {
@@ -20,7 +20,7 @@ public class Score {
         
         this.compute();
     }
-    
+
     public int getNo() {
         return no;
     }
@@ -39,11 +39,11 @@ public class Score {
 
     public int getKor() {
         return kor;
+
     }
 
     public void setKor(int kor) {
         this.kor = kor;
-        
         this.compute();
     }
 
@@ -53,7 +53,6 @@ public class Score {
 
     public void setEng(int eng) {
         this.eng = eng;
-        
         this.compute();
     }
 
@@ -63,7 +62,6 @@ public class Score {
 
     public void setMath(int math) {
         this.math = math;
-        
         this.compute();
     }
 
@@ -74,15 +72,10 @@ public class Score {
     public float getAver() {
         return aver;
     }
-    
+        
     protected void compute() {
         this.sum = this.kor + this.eng + this.math;
         this.aver = this.sum / 3f;
     }
-    
-    
+
 }
-
-
-
-

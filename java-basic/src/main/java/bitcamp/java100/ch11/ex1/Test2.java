@@ -8,9 +8,10 @@ public class Test2 {
         c.model = "티코";
         c.cc = 900;
         c.weight = 3.8f;
+        
         c.run();
         c.stop();
         c.dump();
-        
     }
+
 }

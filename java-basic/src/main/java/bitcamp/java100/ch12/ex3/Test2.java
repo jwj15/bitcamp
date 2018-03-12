@@ -1,21 +1,14 @@
 package bitcamp.java100.ch12.ex3;
 
-public class Test2 implements Protocol3{
+public abstract class Test2 implements Protocol3 {
 
     @Override
-    public void m1() {
-        System.out.println("m1()");
-    }
+    public void m1() {}
 
     @Override
-    public void m2(int v) {
-        System.out.println("m2()");
-    }
+    public void m2(int v) {}
 
-    @Override
-    public void m3(String v) {
-        System.out.println("m3()");
-    }
-    
-    
+//    @Override
+//    public void m3(String v) {}
+
 }

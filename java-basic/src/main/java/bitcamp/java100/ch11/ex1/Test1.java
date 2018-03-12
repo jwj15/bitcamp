@@ -7,8 +7,10 @@ public class Test1 {
         Car c = new Car();
         c.model = "티코";
         c.cc = 900;
+        
         c.run();
         c.stop();
         
     }
+
 }

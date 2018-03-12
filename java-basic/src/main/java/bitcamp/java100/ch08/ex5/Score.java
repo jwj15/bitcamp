@@ -8,7 +8,7 @@ public class Score {
     protected int math;
     protected int sum;
     protected float aver;
-    
+
     public Score() {}
     
     public Score(int no, String name, int kor, int eng, int math) {
@@ -21,13 +21,13 @@ public class Score {
         this.compute();
     }
     
-    @Override
     public String toString() {
         return "Score [no=" + no + ", name=" + name + ", kor=" + kor + ", eng=" + eng + ", math=" + math + ", sum="
                 + sum + ", aver=" + aver + "]";
     }
 
-    @Override
+    
+      @Override
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
@@ -36,6 +36,8 @@ public class Score {
         if (getClass() != obj.getClass())
             return false;
         Score other = (Score) obj;
+        if (Float.floatToIntBits(aver) != Float.floatToIntBits(other.aver))
+            return false;
         if (eng != other.eng)
             return false;
         if (kor != other.kor)
@@ -48,6 +50,8 @@ public class Score {
         } else if (!name.equals(other.name))
             return false;
         if (no != other.no)
+            return false;
+        if (sum != other.sum)
             return false;
         return true;
     }
@@ -70,11 +74,11 @@ public class Score {
 
     public int getKor() {
         return kor;
+
     }
 
     public void setKor(int kor) {
         this.kor = kor;
-        
         this.compute();
     }
 
@@ -84,7 +88,6 @@ public class Score {
 
     public void setEng(int eng) {
         this.eng = eng;
-        
         this.compute();
     }
 
@@ -94,7 +97,6 @@ public class Score {
 
     public void setMath(int math) {
         this.math = math;
-        
         this.compute();
     }
 
@@ -105,15 +107,10 @@ public class Score {
     public float getAver() {
         return aver;
     }
-    
+        
     protected void compute() {
         this.sum = this.kor + this.eng + this.math;
         this.aver = this.sum / 3f;
     }
-    
-    
+
 }
-
-
-
-

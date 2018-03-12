@@ -1,0 +1,1 @@
+var host = "http://192.168.5.69:9999/java-project"

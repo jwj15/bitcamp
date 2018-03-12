@@ -5,10 +5,12 @@ public class Member {
     int age;
     boolean working;
     
+    
     @Override
     public String toString() {
         return "Member [name=" + name + ", age=" + age + ", working=" + working + "]";
     }
+
     public String getName() {
         return name;
     }
@@ -28,5 +30,5 @@ public class Member {
         this.working = working;
     }
     
-    
+
 }

@@ -53,7 +53,7 @@ public class Board {
     }
 
     public Member getWriter() {
-        return this.writer;
+        return writer;
     }
 
     public void setWriter(Member writer) {
@@ -61,7 +61,7 @@ public class Board {
     }
 
     public List<UploadFile> getFiles() {
-        return this.files;
+        return files;
     }
 
     public void setFiles(List<UploadFile> files) {

@@ -10,9 +10,10 @@ import org.springframework.beans.factory.config.AbstractFactoryBean;
 // 역할?
 // => SqlSessionFactory 객체를 만들어주는 공장 역할을 한다.
 public class SqlSessionFactoryBean 
-        extends AbstractFactoryBean<SqlSessionFactory> {
-    
+        extends AbstractFactoryBean<SqlSessionFactory>{
+
     String configLocation;
+    
     
     public void setConfigLocation(String configLocation) {
         this.configLocation = configLocation;
@@ -26,15 +27,7 @@ public class SqlSessionFactoryBean
     @Override
     protected SqlSessionFactory createInstance() throws Exception {
         InputStream inputStream = 
-                Resources.getResourceAsStream(this.configLocation);
+                Resources.getResourceAsStream("step10/mybatis-config.xml");
         return new SqlSessionFactoryBuilder().build(inputStream);
     }
 }
-
-
-
-
-
-
-
-

@@ -1,54 +1,36 @@
-// ## 연산자 - 비트 연산자 (&, |, ~, ^)
-// - 비트 연산자의 사용법을 알아보자!
-//
-
 package bitcamp.java100.ch02;
-
 public class Test15_10 {
-
-    public static void main(String[] args) {
+      
+    public static void main(String[] args){
+        
         int v1 = 0b0101_1100;
         int v2 = 0b0110_0110;
         
-// &(논리곱 AND)
-// => 각 비트끼리 AND 연산을 수행한다. 둘 다 1일 때만 결과는 1이 된다.
+        // & (논리곱 AND)
         int result = v1 & v2;
-        System.out.println(java.lang.Integer.toBinaryString(result));
-
-// |(논리합 OR)
-// => 각 비트끼리 OR 연산을 수행한다. 둘 중 한 개가 1일 때 결과는 1이 된다.
+        System.out.println(java.lang.Integer.toBinaryString(result)); // 이진수로 보여준다.
+        
+        // | (논리 합 OR)
         result = v1 | v2;
         System.out.println(java.lang.Integer.toBinaryString(result));
 
-// ^(배타적 논리곱 Eclusive OR(XOR))
-// => 각 비트끼리 XOR 연산을 수행한다. 두개 비트의 값이 다를 때 결과는 1이 된다.
+        // ^ (배타적 논리곱 Exclusive OR(XOR) -> 두개 값이 다를때 결과 1
         result = v1 ^ v2;
         System.out.println(java.lang.Integer.toBinaryString(result));
-
-// ~(부정 NOT)
-// => 비트값을 반대 값으로 바꾼다. 0이면 1, 1이면 0으로 바꾼다.
+        
+        // ~ (부정 NOT)
         result = ~v1;
         System.out.println(java.lang.Integer.toBinaryString(result));
         
+        
     }
+
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* 
+ * 식(Expression) => 결과를 리턴하는 명령어.
+ * 문장(Statement) => 결과를 반드시 리턴하지는 않는다. 세미콜론으로 끝나야 한다.
+ * 블록(Block) => 한개 이상의 문장이나 하위 블로들로 구성된 것.
+ * 메서드(Method) => 다시 사용할 수 있는 블록.
+ * 클래스(Class) = > 여러 개의 변수 선언과 메서들로 구성된 블록.
+ */ 

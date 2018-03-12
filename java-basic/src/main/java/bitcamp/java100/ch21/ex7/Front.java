@@ -11,18 +11,17 @@ public class Front {
     @Override
     public String toString() {
         return "Front [x=" + x + "]";
-    }
-    
+    } 
+
     public void test(String name) {
-        System.out.println("Font.test() 호출시작-----");
+        System.out.println("Front.test() 호출시작-----");
         try {
             String str = x.m1(name);
             System.out.println(str);
-            
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        System.out.println("Font.test() 호출 끝-----");
+        System.out.println("Front.test() 호출 끝------");
     }
-
+    
 }

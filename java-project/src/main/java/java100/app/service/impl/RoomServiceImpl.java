@@ -18,9 +18,11 @@ public class RoomServiceImpl implements RoomService {
     
     @Override
     public List<Room> list(int pageNo, int pageSize, Map<String, Object> options) {
+        
         HashMap<String,Object> params = new HashMap<>();
-        params.put("startIndex", (pageNo-1) * pageSize);
+        params.put("startIndex", (pageNo - 1) * pageSize);
         params.put("size", pageSize);
+        
         if (options != null) {
             params.putAll(options);
         }
@@ -34,14 +36,14 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public int add(Room room) {
-        return roomDao.insert(room);
+    public int add(Room score) {
+        return roomDao.insert(score);
     }
+
 
     @Override
     public int delete(int no) {
         return roomDao.delete(no);
     }
-    
 
 }

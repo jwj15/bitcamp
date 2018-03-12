@@ -1,6 +1,7 @@
 package bitcamp.java100.ch08.ex7;
 
 public class C {
+
     void m1() {
         System.out.println("C.m1()");
     }
@@ -16,5 +17,4 @@ public class C {
     void m4() {
         System.out.println("C.m4()");
     }
-    
 }

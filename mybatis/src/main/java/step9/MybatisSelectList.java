@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MybatisSelectList {
+
     public static void main(String[] args) throws Exception {
         BoardDao boardDao = new BoardDao();
         boardDao.setSqlSessionFactory(SqlSessionFactoryBean.getObject());
@@ -17,22 +18,24 @@ public class MybatisSelectList {
         data.put("orderColumn", "regdt");
         data.put("align", "desc");
         
-        // where 절을 위한 값
+        // wherer 절을 위한 값
         List<String> words = new ArrayList<>();
         words.add("aa");
         words.add("1");
-        words.add("5");
-        
-        //data.put("words", words);
-        
+        words.add("오");
+        // data.put("words", words);
         List<Board> records = boardDao.findAll(data);
+        
+        // List에 저장된 객체의 타입은?
+        // => SQL Mapper에 설정된 resultType이다.
         
         for (Board board : records) {
             System.out.printf("%d,%s,%s,%s\n", 
-                    board.getNo(),
+                    board.getNo(), 
                     board.getTitle(),
                     board.getCreatedDate(),
                     board.getViewCount());
         }
+
     }
 }

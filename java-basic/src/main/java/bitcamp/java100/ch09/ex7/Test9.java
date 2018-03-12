@@ -1,4 +1,3 @@
-// 컬렉션 API - HashMap III
 package bitcamp.java100.ch09.ex7;
 
 import java.util.HashMap;
@@ -44,13 +43,14 @@ public class Test9 {
                 return false;
             return true;
         }
+   
     }
-    
+
     static class Contact {
         String name;
         String email;
         String tel;
-        
+
         public Contact(String name, String email, String tel) {
             this.name = name;
             this.email = email;
@@ -61,50 +61,24 @@ public class Test9 {
         public String toString() {
             return "Contact [name=" + name + ", email=" + email + ", tel=" + tel + "]";
         }
+        
+        
+        
     }
-    
-    
     public static void main(String[] args) {
-        
-        HashMap<MyKey,Contact> map = new HashMap<>();
-        
-        Contact c1 = new Contact("홍길동", "hong@test.com", "1111-1111");
+
+        // HashMap 객체를 생성할때 key의 타입과 value타입 이름을 넘겨야 한다.
+        HashMap<MyKey, Contact> map = new HashMap<>();
+
+        Contact c1 = new Contact("홍길동", "hoang@test.com", "1111-1111");
         MyKey k1 = new MyKey("aaaa", "1111");
-        
-        // 값을 저장할 때 MyKey를 사용하여 저장하고,
         map.put(k1, c1);
-        
-        // 저장할 때 사용한 같은 MyKey 객체를 사용하여 값을 꺼낸다.
+
         System.out.println(map.get(k1));
         
-        // 내용이 같은 다른 MyKey 객체를 사용한다면?
-        // => 이 예제의 MyKey는 내용물이 같을 때 같은 해시 값을 리턴하고,
-        //    equals()의 리턴 값이 true가 되도록 오버라이딩 했기 때문에
-        //    비록 MyKey 인스턴스가 다르더라도 값을 찾을 수 있을 것이다.
         MyKey k2 = new MyKey("aaaa", "1111");
         System.out.println(map.get(k2));
-        
-        // 결론!
-        // - String 클래스와 Wrapper 클래스(Byte, Short, Integer, ...등)들은
-        //   Object로부터 상속 받은 hashCode()와 equals()를 오버라이딩 했기 때문에
-        //   HashMap이나 Hashtable의 key 클래스로 자주 사용한다.
-        // 
+
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

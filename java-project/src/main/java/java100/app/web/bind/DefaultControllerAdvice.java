@@ -1,6 +1,7 @@
 // 클라이언트가 보낸 문자열 데이터를 다른 타입으로 변환하기
 package java100.app.web.bind;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -23,19 +24,12 @@ import org.springframework.web.bind.annotation.InitBinder;
 //    value : basePackages 와 같다.
 //    assignableType : 특정 타입의 페이지 컨트롤러들.
 //
-// => 다음 애노테이션을 주석으로 막아서 동작 안되게 하라!
-//    그리고 WebBindingInitializer를 테스트하라!
-@ControllerAdvice
+@ControllerAdvice // 모든 페이지 컨트롤러에 충고한다.
 public class DefaultControllerAdvice {
    
-    // @InitBinder를 이 클래스에 두면 특정 컨트롤러가 아닌
-    // 충고하기를 원하는 모든 컨트롤러에 적용할 수 있어 편리하다.
-    // 즉 문자열을 날짜 타입으로 바꾸기를 원하는 컨트롤러 마다 
-    // 이 메서드를 추가할 필요가 없다.
-    //
-    @InitBinder
+    @InitBinder // 요청 핸들러가 호출되기 전에 먼저 실행된다.
     protected void initBinder(WebDataBinder binder) {
-        //System.out.println("ControllerAdvice.initBinder()");
+        System.out.println("DefaultControllerAdvice.initBinder()");
         
         // 문자열을 날짜 객체로 만들어줄 도구를 준비한다.
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -49,5 +43,39 @@ public class DefaultControllerAdvice {
                 new CustomDateEditor( // 문자열을 java.util.Date 객체로 만들어 준다.
                         dateFormat, // 실제로는 그 작업을 SimpleDateFormat이 한다. 
                         false)); // 문자열 값이 비어 있는 것을 허락할 것인지 여부!
+        
+        // "yyyy-MM-dd" 형식 문자열 ===> java.sql.Date
+        @SuppressWarnings("serial")
+        SimpleDateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd") {
+            @Override
+            public java.util.Date parse(String source) throws ParseException {
+                java.util.Date date = super.parse(source);
+                return new java.sql.Date(date.getTime());
+            }
+        };
+        dateFormat2.setLenient(false); // 날짜 형식을 엄격하게 검사하라!
+        
+        binder.registerCustomEditor(
+                java.sql.Date.class,  
+                new CustomDateEditor(dateFormat2, false)); 
+        
+        // 숫자가 빈 문자열로 들어올 때 기본 값 0으로 설정하기!
+        // => 클라이언트에서 보내기 전에 유효한 값을 보내는 것이 좋다!
+        /*
+        binder.registerCustomEditor(
+                int.class,
+                new PropertyEditorSupport() {
+                    @Override
+                    public void setAsText(String text) throws IllegalArgumentException {
+                        System.out.println("string ===> int");
+                        if (text == null || text.length() == 0) {
+                            this.setValue(0);
+                        } else {
+                            this.setValue(Integer.parseInt(text));
+                        }
+                    }
+                });
+        */
+        
     }
 }

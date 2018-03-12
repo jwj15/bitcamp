@@ -1,31 +1,25 @@
-// 데이터 프로세싱 스트림 클래스 사용법 - ObjectInputStream 사용하기
-// 
 package bitcamp.java100.ch14.ex4;
 
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 
 public class Test2_2 {
+
     public static void main(String[] args) throws Exception {
         
-        ObjectInputStream in = new ObjectInputStream(
-                                    new FileInputStream("test2.dat"));
         
-        Score3 s = (Score3)in.readObject(); 
+        ObjectInputStream in = new ObjectInputStream(new FileInputStream("test2.dat"));
+        
+        // 조건
+        // serialization을 허락해야만 직렬화를 수행할 수 있다.
+        // 허락 방법?
+        // 클래스 선언부에 java.io.Serializable 규칙(인터페이스)을 구현한다
+
+        
+        Score3 s = (Score3)in.readObject();
         
         in.close();
         
         System.out.println(s);
     }
 }
-
-
-
-
-
-
-
-
-
-
-

@@ -1,24 +1,21 @@
 package java100.app;
 
-import java.lang.reflect.Method;
-import java.util.List;
+import java.util.HashMap;
 
-import org.reflections.ReflectionUtils;
+import org.springframework.web.client.RestTemplate;
+
 
 public class Test {
 
-    static void m(int a, int b, int c) {
-        
-    }
-    
     public static void main(String[] args) {
-        String name = "FirstName";
+        HashMap<String,String> parameters = new HashMap<>();
+        parameters.put("name", "홍길동");
+        parameters.put("age", "20");
         
-        String propName = String.format("%c%s", 
-                Character.toLowerCase(name.charAt(0)),
-                name.substring(1));
-        
-        System.out.println(propName);
+        RestTemplate template = new RestTemplate();
+        String result = template.getForObject("https://www.eomcs.com/", String.class, parameters);
+        System.out.println("---------------------------------");
+        System.out.println(result);
     }
 
 }

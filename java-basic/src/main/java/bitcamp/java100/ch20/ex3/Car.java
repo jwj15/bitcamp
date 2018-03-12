@@ -1,6 +1,7 @@
 package bitcamp.java100.ch20.ex3;
 
 public class Car {
+    
     private String model;
     private String color;
     private int capacity;

@@ -22,108 +22,136 @@ import java100.app.domain.Member;
 import java100.app.domain.UploadFile;
 import java100.app.service.BoardService;
 
-//@Component 대신 @Controller를 붙여 페이지 컨트롤러임을 명시한다.
-//
-//스프링 IoC 컨테이너에서 애노테이션 중에서 객체 생성을 표시하는 애노테이션
-//=> @Component
-// - 일반 클래스에 대해 주로 붙인다.
-//=> @Controller
-// - 웹 애플리케이션에서 페이지 컨트롤러 역할을 수행하는 클래스에 주로 붙인다.
-//=> @Service
-// - MVC 아키텍처에서 Model 중에 비즈니스 로직을 담당하는 클래스에 붙인다.
-//=> @Repository
-// - MVC 아키텍처의 Model 중에서 데이터 처리를 담당하는 클래스에 붙인다.
-// - 주로 DAO 클래스에 붙인다.
-//
 @Controller
 @RequestMapping("/board")
 @SessionAttributes("loginUser")
 public class BoardController {
+    
     @Autowired ServletContext servletContext;
     @Autowired BoardService boardService;
     
     @RequestMapping("list")
     public String list(
-            @RequestParam(value="nm", required=false) String[] names,
-            @RequestParam(value="oc", required=false) String orderColumn,
-            @RequestParam(value="al", required=false) String align,
             @RequestParam(value="pn", defaultValue="1") int pageNo,
             @RequestParam(value="ps", defaultValue="5") int pageSize,
+            @RequestParam(value="words", required=false) String[] words,
+            @RequestParam(value="oc", required=false) String orderColumn,
+            @RequestParam(value="al", required=false) String align,
             Model model) throws Exception {
-        if (pageNo < 1 ) {
+
+        // UI 제어와 관련된 코드는 이렇게 페이지 컨트롤러에 두어야 한다.
+        //
+        if (pageNo < 1) {
             pageNo = 1;
         }
         
         if (pageSize < 5 || pageSize > 15) {
             pageSize = 5;
         }
+        
         HashMap<String,Object> options = new HashMap<>();
-        if (names != null && names[0].length() > 0) {
-            options.put("names", names);
+        if (words != null && words[0].length() > 0) {
+            options.put("words", words);
         }
         options.put("orderColumn", orderColumn);
         options.put("align", align);
+        
         int totalCount = boardService.getTotalCount();
         int lastPageNo = totalCount / pageSize;
-        if ((totalCount % pageSize) > 0 ) {
+        if ((totalCount % pageSize) > 0) {
             lastPageNo++;
         }
+        
+        // view 컴포넌트가 사용할 값을 Model에 담는다.
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("lastPageNo", lastPageNo);
         model.addAttribute("list", boardService.list(pageNo, pageSize, options));
         return "board/list";
     }
-    
+
     @RequestMapping("{no}")
     public String view(@PathVariable int no, Model model) throws Exception {
+        
         model.addAttribute("board", boardService.get(no));
         return "board/view";
-        
     }
     
     @RequestMapping("form")
     public String form() throws Exception {
         return "board/form";
+        
     }
     
+    // XML 설정으로 트랜잭션을 조정한다면 @Transactional 애노테이션은 필요없다.
+    //@Transactional
     @RequestMapping("add")
-    public String add(Board board,
+    public String add(
+            Board board,
             MultipartFile[] file,
-            @ModelAttribute("loginUser") Member loginUser) throws Exception {
+            @ModelAttribute(value="loginUser") Member loginUser) throws Exception {
         
+        // 업로드 파일을 저장할 폴더 위치를 가져온다.
         String uploadDir = servletContext.getRealPath("/download");
+
+        // 업로드 파일 정보를 저장할 List 객체 준비
         ArrayList<UploadFile> uploadFiles = new ArrayList<>();
+        
+        // 클라이언트가 보낸 파일을 저장하고, 
+        // 그 파일명(저장할 때 사용한 파일명)을 목록에 추가한다.
         for (MultipartFile part : file) {
-            if (part.isEmpty()) 
+            if (part.isEmpty())
                 continue;
+            
             String filename = this.writeUploadFile(part, uploadDir);
+            
             uploadFiles.add(new UploadFile(filename));
         }
+        
+        // Board 객체에 저장한 파일명을 등록한다. 
         board.setFiles(uploadFiles);
+
+        // 게시글 작성자는 로그인 사용자이다. 
         board.setWriter(loginUser);
+        
+        // 게시글 등록
         boardService.add(board);
+        
         return "redirect:list";
     }
     
     @RequestMapping("update")
-    public String update(Board board,
+    public String update(
+            Board board, 
             MultipartFile[] file) throws Exception {
+        
+        // 업로드 파일을 저장할 폴더 위치를 가져온다.
         String uploadDir = servletContext.getRealPath("/download");
+
+        // 업로드 파일 정보를 저장할 List 객체 준비
         ArrayList<UploadFile> uploadFiles = new ArrayList<>();
+        
+        // 클라이언트가 보낸 파일을 저장하고, 
+        // 그 파일명(저장할 때 사용한 파일명)을 목록에 추가한다.
         for (MultipartFile part : file) {
-            if (part.isEmpty()) 
+            if (part.isEmpty())
                 continue;
+            
             String filename = this.writeUploadFile(part, uploadDir);
+            
             uploadFiles.add(new UploadFile(filename));
         }
+        
+        // Board 객체에 저장한 파일명을 등록한다. 
         board.setFiles(uploadFiles);
+
         boardService.update(board);
+        
         return "redirect:list";
     }
-    
+
     @RequestMapping("delete")
     public String delete(int no) throws Exception {
-        
+
         boardService.delete(no);
         return "redirect:list";
     }
@@ -131,6 +159,8 @@ public class BoardController {
     long prevMillis = 0;
     int count = 0;
     
+    // 다른 클라이언트가 보낸 파일명과 중복되지 않도록 
+    // 서버에 파일을 저장할 때는 새 파일명을 만든다.
     synchronized private String getNewFilename(String filename) {
         long currMillis = System.currentTimeMillis();
         if (prevMillis != currMillis) {
@@ -141,6 +171,7 @@ public class BoardController {
         return  currMillis + "_" + count++ + extractFileExtName(filename); 
     }
     
+    // 파일명에서 뒤의 확장자명을 추출한다.
     private String extractFileExtName(String filename) {
         int dotPosition = filename.lastIndexOf(".");
         
@@ -151,14 +182,11 @@ public class BoardController {
     }
     
     private String writeUploadFile(MultipartFile part, String path) throws IOException {
-                
+        
         String filename = getNewFilename(part.getOriginalFilename());
-        
         part.transferTo(new File(path + "/" + filename));
-        
         return filename;
-    }
-    
+    }    
 }
 
 

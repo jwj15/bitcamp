@@ -15,44 +15,31 @@
 <button type="button" onclick="f3()">요청3</button></p>
 
 <script>
-function f1() {
-	var xhr = new XMLHttpRequest();
-	xhr.open('GET', '../app/v02/test08', false);
-	xhr.setRequestHeader("Accept", "text/csv");
-	xhr.send(); 
-	window.alert(xhr.responseText); 
+function f1(){
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '../app/v02/test08', false); // 웹서버에 연결한다.
+    xhr.setRequestHeader("Accept", "text/csv");
+    xhr.send(); // 웹서버에 POST 요청을 보낸다.
+    window.alert(xhr.responseText); // 웹서버가 응답한 내용을 출력한다.
 }
 
-function f2() {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '../app/v02/test08', false);
+function f2(){
+	var xhr = new XMLHttpRequest();
+    xhr.open('GET', '../app/v02/test08', false); // 웹서버에 연결한다.
     xhr.setRequestHeader("Accept", "application/json");
     xhr.send();
-    window.alert(xhr.responseText);
+    window.alert(xhr.responseText); // 웹서버가 응답한 내용을 출력한다.
+    
 }
 
-function f3() {
-	// 웹서버에게 HTTP 요청 보내기
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '../app/v02/test08', false);
-    xhr.send();
-    window.alert(xhr.responseText);
+function f3(){
+	var xhr = new XMLHttpRequest();
+    xhr.open('GET', '../app/v02/test08', false); // 웹서버에 연결한다.
+    xhr.send(); // 웹서버에 요청을 보낸다.
+    window.alert(xhr.responseText); // 웹서버가 응답한 내용을 출력한다.
+    
 }
+
 </script>
-
-
-
-
-
-
-
 </body>
-</html>
-
-
-
-
-
-
-
-
+</html> 

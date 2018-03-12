@@ -9,4 +9,5 @@ public class A {
         System.out.println("A의 int m2()");
         return 100;
     }
+    
 }

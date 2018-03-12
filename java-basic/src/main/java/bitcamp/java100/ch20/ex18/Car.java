@@ -7,13 +7,15 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Car {
+    
+    
     private String model;
     private String color;
     private int capacity;
     
     @Autowired private Engine engine;
     
-    private Map<String,String> options;
+    private Map<String, String> options;
     
     @Override
     public String toString() {
@@ -25,35 +27,47 @@ public class Car {
         System.out.println("Car()");
     }
 
+
     public String getModel() {
         return model;
     }
+
 
     public void setModel(String model) {
         this.model = model;
     }
 
+
     public String getColor() {
         return color;
     }
+
 
     public void setColor(String color) {
         this.color = color;
     }
 
+
     public int getCapacity() {
         return capacity;
     }
+
 
     public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
 
+    
     public Map<String, String> getOptions() {
         return options;
     }
 
+
     public void setOptions(Map<String, String> options) {
         this.options = options;
     }
+    
+   
+    
+    
 }

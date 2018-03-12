@@ -1,8 +1,9 @@
 package bitcamp.java100.ch11.ex2;
 
 public class Test2 {
-    
+
     public static void main(String[] args) {
+        
         Truck car = new Truck();
         car.model = "타이탄";
         car.cc = 5000;
@@ -11,6 +12,5 @@ public class Test2 {
         car.move();
         car.stop();
         car.dump();
-        
     }
 }

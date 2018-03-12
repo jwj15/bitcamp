@@ -10,8 +10,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
-// 서블릿 앞 쪽에 놓이는 필터 
-//
+// 서블릿 앞 쪽에 놓이는 필터
+
 @WebFilter("/app/v04/*")
 public class Filter01 implements Filter {
 
@@ -22,12 +22,11 @@ public class Filter01 implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         
-        System.out.println("Filter01 ----------------");
+        System.out.println("Filter01 -------------------");
         
         chain.doFilter(request, response);
         
-        System.out.println("-------------------Filter01");
-        
+        System.out.println("--------------------Filter01");
     }
 
     @Override

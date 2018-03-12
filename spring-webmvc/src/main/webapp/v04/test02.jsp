@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Controller02.m2()....JSP</h1>
+<h1>Controller02.m2().....JSP</h1>
 </body>
 </html>
 

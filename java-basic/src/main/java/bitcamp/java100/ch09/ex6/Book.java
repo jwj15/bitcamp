@@ -6,4 +6,5 @@ public class Book {
     String press;
     int page;
     int price;
+
 }

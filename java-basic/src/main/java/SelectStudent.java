@@ -9,14 +9,15 @@ public class SelectStudent {
     public static void main(String[] args) throws Exception {
         for (int i = 0; i < 27; i++) {
             int no = (int)(Math.random() * 27);
-            System.out.println(names[no]);
-            Thread.sleep(500);
+
+            for(int j = 0; j <names.length; j++){
+               
+            }
+            if(i%8==0) System.out.println();
+            System.out.print(names[no]);
+
+            
         }
-        for (int i = 0; i < 10; i++) {
-            Thread.sleep(1000);
-            System.out.print(".");
-        }
-        System.out.println();
-        System.out.println("반장: " + names[(int)(Math.random() * 27)]);
+       
     }
 }

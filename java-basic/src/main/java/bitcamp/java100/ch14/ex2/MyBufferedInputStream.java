@@ -13,21 +13,19 @@ public class MyBufferedInputStream extends FileInputStream {
     public MyBufferedInputStream(String name) throws FileNotFoundException {
         super(name);
     }
-    
+
     @Override
     public int read() throws IOException {
-        if (cursor >= len) { // 버퍼가 비었으면 다시 버퍼를 채운다.
-            cursor = 0; // 커서는 다시 0으로 초기화시킨다.
+        if (cursor >= len) {
+            cursor = 0;
             len = this.read(buf);
-            if (len == -1) // 파일에서 읽을 데이터가 없다면 
+            if (len == -1)
                 return -1;
         }
         
         return buf[cursor++] & 0x000000FF;
+        
     }
-    
-    
-
     
 
 }
